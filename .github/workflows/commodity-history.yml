@@ -1,0 +1,33 @@
+name: Update Commodity History Chart Data
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # tiap 09:00 WIB
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Yahoo Finance history fetcher
+        run: python get_commodity_history.py
+
+      - name: Commit and push JSON
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add commodity_history.json
+          git commit -m "📈 Auto-update commodity history data"
+          git push
