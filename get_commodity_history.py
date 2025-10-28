@@ -20,7 +20,7 @@ result = {
 
 for name, symbol in symbols.items():
     try:
-        df = yf.download(symbol, period="1mo", interval="1d", progress=False)
+        df = yf.download(symbol, period="1y", interval="1d", progress=False)
         if not df.empty:
             data = [
                 {
