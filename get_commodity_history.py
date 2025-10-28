@@ -13,7 +13,7 @@ symbols = {
 result = {
     "source": "yahoo-finance",
     "updated": datetime.now().isoformat(),
-    "period": "1mo",
+    "period": "1y",
     "interval": "1d",
     "data": []
 }
